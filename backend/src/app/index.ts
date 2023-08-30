@@ -1,16 +1,14 @@
-import express from 'express';
-import bodyParser from 'body-parser';
+import * as express from 'express';
 import { connectToDatabase } from './db-connector';
-
 import Config from './config';
 import routes from "./route/index";
 
 const app = express();
 
 // Middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(routes)
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(routes);
 
 async function start() {
     const { MONGO_URL, FASHION_CLOUD_DB, SERVICE_PORT } = Config;
