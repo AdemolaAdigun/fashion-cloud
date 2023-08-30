@@ -1,15 +1,13 @@
-import * as mongoose from'mongoose';
+import mongoose from 'mongoose';
 
-const connectMongo = async (mongoUrl) => {
+mongoose.set('strictQuery', false);
+
+/** Connect to MongoDB */
+export async function connectToDatabase(uri: string): Promise<void> {
     try {
-        await mongoose.connect(mongoUrl);
+        await mongoose.connect(uri);
+    } catch (error) {
+        console.error("Failed to connect to MongoDB:", error);
+        throw error;
     }
-    catch (error) {
-        console.log("error ", error)
-        process.exit(1);
-    }
-};
-
-export default {
-    connectMongo
-};
+}
