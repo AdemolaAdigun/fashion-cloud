@@ -1,0 +1,172 @@
+[
+  {
+    "gtin": "1234567890123",
+    "brandName": "Aurora",
+    "stock": 500,
+    "category": "shirt",
+    "color": "blue",
+    "name": "Aurora Blue Shirt",
+    "image": "shirt.png",
+    "price": 46
+  },
+  {
+    "gtin": "1234567890124",
+    "brandName": "Aurora",
+    "stock": 300,
+    "category": "pant",
+    "color": "black",
+    "name": "Aurora Black Pant",
+    "image": "pant.png",
+    "price": 30
+  },
+  {
+    "gtin": "1234567890125",
+    "brandName": "Aurora",
+    "stock": 150,
+    "category": "jacket",
+    "color": "brown",
+    "name": "Aurora Brown Jacket",
+    "image": "jacket.png",
+    "price": 48
+  },
+  {
+    "gtin": "1234567890126",
+    "brandName": "Aurora",
+    "stock": 200,
+    "category": "shirt",
+    "color": "red",
+    "name": "Aurora Red Shirt",
+    "image": "shirt.png",
+    "price": 61
+  },
+  {
+    "gtin": "1234567890127",
+    "brandName": "Aurora",
+    "stock": 250,
+    "category": "pant",
+    "color": "green",
+    "name": "Aurora Green Pant",
+    "image": "pant.png",
+    "price": 34
+  },
+  {
+    "gtin": "1234567890128",
+    "brandName": "Aurora",
+    "stock": 100,
+    "category": "jacket",
+    "color": "gray",
+    "name": "Aurora Gray Jacket",
+    "image": "jacket.png",
+    "price": 36
+  },
+  {
+    "gtin": "1234567890129",
+    "brandName": "Aurora",
+    "stock": 50,
+    "category": "shirt",
+    "color": "white",
+    "name": "Aurora White Shirt",
+    "image": "shirt.png",
+    "price": 19
+  },
+  {
+    "gtin": "1234567890131",
+    "brandName": "Aurora",
+    "stock": 100,
+    "category": "jacket",
+    "color": "black",
+    "name": "Aurora Black Jacket",
+    "image": "jacket.png",
+    "price": 37
+  },
+  {
+    "gtin": "1234567890132",
+    "brandName": "Aurora",
+    "stock": 150,
+    "category": "shirt",
+    "color": "gray",
+    "name": "Aurora Gray Shirt",
+    "image": "shirt.png",
+    "price": 65
+  },
+  {
+    "gtin": "1234567890134",
+    "brandName": "Aurora",
+    "stock": 75,
+    "category": "jacket",
+    "color": "brown",
+    "name": "Aurora Brown Jacket",
+    "image": "jacket.png",
+    "price": 42
+  },
+  {
+    "gtin": "1234567891129",
+    "brandName": "Nova",
+    "stock": 100,
+    "category": "jacket",
+    "color": "black",
+    "name": "Nova Black Jacket",
+    "image": "jacket.png",
+    "price": 45
+  },
+  {
+    "gtin": "1234567891130",
+    "brandName": "Nova",
+    "stock": 150,
+    "category": "shirt",
+    "color": "gray",
+    "name": "Nova Gray Shirt",
+    "image": "shirt.png",
+    "price": 26
+  },
+  {
+    "gtin": "1234567891132",
+    "brandName": "Nova",
+    "stock": 75,
+    "category": "jacket",
+    "color": "brown",
+    "name": "Nova Brown Jacket",
+    "image": "jacket.png",
+    "price": 18
+  },
+  {
+    "gtin": "1234567891133",
+    "brandName": "Nova",
+    "stock": 200,
+    "category": "shirt",
+    "color": "blue",
+    "name": "Nova Blue Shirt",
+    "image": "shirt.png",
+    "price": 34
+  },
+  {
+    "gtin": "1234567891135",
+    "brandName": "Nova",
+    "stock": 500,
+    "category": "shirt",
+    "color": "red",
+    "name": "Nova Red Shirt",
+    "image": "shirt.png",
+    "price": 73
+  },
+  {
+    "gtin": "1234537890125",
+    "brandName": "Aurora",
+    "stock": 150,
+    "category": "jacket",
+    "color": "brown",
+    "name": "Aurora Brown Jacket",
+    "image": "jacket.png",
+    "price": 48
+  },
+  {
+    "gtin": "1234567890141",
+    "brandName": "Aurora",
+    "stock": 200,
+    "category": "shirt",
+    "color": "red",
+    "name": "Aurora Red Shirt",
+    "image": "shirt.png",
+    "price": 61
+  }
+]
