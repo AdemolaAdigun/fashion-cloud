@@ -4,6 +4,12 @@ import { handleError, notFoundError } from "../helper/handleError";
 import paginate from "../helper/handlePagination";
 
 export default {
+    /**
+     * Fetches products based on provided criteria.
+     *
+     * @param {Request} request - Express request object.
+     * @param {Response} response - Express response object.
+     */
     async getProducts(request: Request, response: Response): Promise<void> {
         try {
             const {
@@ -14,23 +20,27 @@ export default {
 
             const query: Record<string, any> = {};
 
+            // Filter by brand if provided
             if (brand) {
                 query["brandName"] = brand;
             }
 
+            // Filter by category if provided
             if (category) {
                 query["category"] = category;
             }
 
+            // Paginate results
             const { skip, limit } = paginate(request);
 
-            // Default order is descending. If 'order' query param is set to 'ascending', set price to 1.
+            // Set order of product results based on query
             const sortOrder = order === 'ascending' ? 1 : -1;
 
+            // Fetch products
             const products = await Product.find(query)
-                .skip(skip)  // We skip based on page number.
+                .skip(skip)  // Skips results based on page number.
                 .limit(limit)
-                .sort({ price: sortOrder }); // Sorting by price
+                .sort({ price: sortOrder }); // Sorts results by price
 
             if (products.length === 0) {
                 notFoundError(response, "No products found based on the given criteria");
@@ -43,6 +53,12 @@ export default {
         }
     },
 
+    /**
+     * Creates a new product.
+     *
+     * @param {Request} request - Express request object.
+     * @param {Response} response - Express response object.
+     */
     async createProduct(request: Request, response: Response): Promise<void> {
         try {
             const product = await Product.create(request.body);
@@ -52,6 +68,12 @@ export default {
         }
     },
 
+    /**
+     * Updates a product by its ID.
+     *
+     * @param {Request} request - Express request object.
+     * @param {Response} response - Express response object.
+     */
     async updateProductById(request: Request, response: Response): Promise<void> {
         const { id } = request.params;
         try {
@@ -66,6 +88,12 @@ export default {
         }
     },
 
+    /**
+     * Deletes a product by its ID.
+     *
+     * @param {Request} request - Express request object.
+     * @param {Response} response - Express response object.
+     */
     async deleteProductById(request: Request, response: Response): Promise<void> {
         const { id } = request.params;
         try {
