@@ -2,7 +2,8 @@ import {Router} from "express";
 import routesController from "../controller/product";
 const routes = Router();
 
-const { getProducts, createProduct, updateProductById, deleteProductById } = routesController;
+const { getProducts, createProduct, updateProductById,
+    deleteProductById } = routesController;
 
 routes.get('/', getProducts);
 routes.post('/', createProduct);
