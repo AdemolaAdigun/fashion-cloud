@@ -1,29 +1,68 @@
+@shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+@gap-size: 25px;
+@font: 'Barlow', serif;
+
 .products-container {
   display: flex;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap;
+  gap: @gap-size;
   font-size: 12px;
-  margin: 25px;
-  padding: 25px;
-  gap: 25px;
+  justify-content: center;
+  padding: @gap-size;
+  margin: @gap-size;
+  box-shadow: @shadow;
 
   .product-card {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; // Default to full width on mobile
     padding: 10px;
-    width: 10%;
+    box-shadow: @shadow;
 
     .product-image {
-      background-color: #efefef;
-      height: 100px;
+      height: 25vh;
       margin-bottom: 8px;
+      overflow: hidden;
+      position: relative;
+
+      img {
+        object-fit: cover;
+        display: block;
+      }
     }
 
     .product-details {
       position: relative;
       top: 10px;
-      font-family: 'Barlow', serif;
-      font-weight: bold;
       font-size: 15px;
+      font-weight: bold;
+      font-family: @font;
+    }
+  }
+
+  // Styles for larger mobile devices or smaller tablets
+  @media screen and (min-width: 480px) {
+    .product-card {
+      width: 50%; // 2 products in a row
+    }
+  }
+
+  // Styles for tablets or medium-sized screens
+  @media screen and (min-width: 768px) {
+    .product-card {
+      width: 33.33%; // 3 products in a row on larger tablets
+    }
+  }
+
+  // Styles for desktops or larger screens
+  @media screen and (min-width: 1024px) {
+    .product-card {
+      width: 25%; // 4 products in a row on desktop screens
+    }
+  }
+
+  // Styles for very wide screens
+  @media screen and (min-width: 1200px) {
+    .product-card {
+      width: 20%; // 5 products in a row
     }
   }
 }

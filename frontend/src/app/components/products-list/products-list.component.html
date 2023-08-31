@@ -1,7 +1,8 @@
+<!-- Display products array -->
 <div class="products-container">
   <div class="product-card" *ngFor="let product of products.products">
     <div class="product-image">
-      <img src="{{ product.image }}" alt="{{ product.name }}" (error)="product.image = '/assets/images/placeholder.jpg'">
+      <img src="./assets/productImages/{{ product.image }}" alt="{{ product.name }}">
     </div>
     <div class="product-details">
       <p class="product-name">{{ product.name }}</p>
@@ -9,6 +10,6 @@
     </div>
   </div>
 
-  <!-- Display 'No results' if the array is empty -->
+  <!-- Display 'No results' if products array is empty -->
   <p *ngIf="!products.products?.length">No results to display</p>
 </div>
