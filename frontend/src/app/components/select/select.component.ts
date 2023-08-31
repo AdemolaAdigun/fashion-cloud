@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
 import { FilterOptionsService } from "../../services/filter-options.service";
-import {FilterOptions} from "../../interfaces/filter-options";
+import { FilterOptions } from "../../interfaces/filter-options";
 
 @Component({
   selector: 'app-select',
@@ -11,10 +11,12 @@ import {FilterOptions} from "../../interfaces/filter-options";
 })
 export class SelectComponent implements OnInit {
 
+  // Arrays for dropdown filter options
   brandFilterArray: string[] = [];
   categoryFilterArray: string[] = [];
   orderFilterArray: string[] = ['ascending', 'descending'];
 
+  // Form group for filter controls
   filtersForm = new FormGroup({
     selectedCategory: new FormControl(''),
     selectedBrand: new FormControl(''),
@@ -25,6 +27,10 @@ export class SelectComponent implements OnInit {
 
   constructor(private productService: ProductService, private filterOptionsService: FilterOptionsService) {}
 
+  /**
+   * On component initialization, fetch the available brands and categories
+   * for filtering from the ProductService.
+   */
   async ngOnInit(): Promise<void> {
     try {
       this.brandFilterArray = await this.productService.getFilterArray('brands');
@@ -34,6 +40,10 @@ export class SelectComponent implements OnInit {
     }
   }
 
+  /**
+   * On form submission, transform the form values into a FilterOptions object
+   * and pass it to the FilterOptionsService.
+   */
   submitForm() {
     const filterValues = this.filtersForm.value;
     const transformedFilter: FilterOptions = {

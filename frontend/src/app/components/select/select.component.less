@@ -1,13 +1,21 @@
+@form-width: 100%;
+@form-max-width: 1200px;
+@form-padding: 20px;
+@shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+@label-color: #333;
+@button-color: #304c55;
+@button-hover-color: #5e94a5;
+
 form {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  max-width: 1200px;
+  width: @form-width;
+  max-width: @form-max-width;
   margin: 0 auto;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: @form-padding;
+  box-shadow: @shadow;
 
   > * {
     flex: 1;
@@ -26,14 +34,14 @@ form {
     width: 100%;
 
     mat-label {
-      color: #333;
+      color: @label-color;
     }
 
     input, .mat-select {
       padding: 10px;
       border-radius: 4px;
       &:focus {
-        border-color: #5e94a5;
+        border-color: @button-hover-color;
       }
     }
   }
@@ -41,13 +49,14 @@ form {
   button {
     flex: none;
     padding: 10px 20px;
-    background-color: #304c55;
+    background-color: @button-color;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+
     &:hover {
-      background-color: #5e94a5;
+      background-color: @button-hover-color;
     }
   }
 
@@ -55,12 +64,19 @@ form {
     flex-direction: column;
 
     > * {
-      margin: 10px 0;
+      margin: 15px 0; // Increased margin for better spacing on mobile
       flex: none;
+    }
+
+    mat-form-field {
+      mat-label {
+        font-size: 16px; // Optionally, increase font size for better readability
+      }
     }
 
     button {
       width: 100%;
+      margin-top: 15px; // Some additional margin to separate from the fields
     }
   }
 }
