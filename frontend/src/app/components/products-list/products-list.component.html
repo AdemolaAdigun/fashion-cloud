@@ -1,1 +1,14 @@
-<p>products-list works!</p>
+<div class="products-container">
+  <div class="product-card" *ngFor="let product of products.products">
+    <div class="product-image">
+      <img src="{{ product.image }}" alt="{{ product.name }}" (error)="product.image = '/assets/images/placeholder.jpg'">
+    </div>
+    <div class="product-details">
+      <p class="product-name">{{ product.name }}</p>
+      <p class="product-price">Price: ${{ product.price }}</p>
+    </div>
+  </div>
+
+  <!-- Display 'No results' if the array is empty -->
+  <p *ngIf="!products.products?.length">No results to display</p>
+</div>

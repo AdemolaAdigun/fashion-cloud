@@ -10,7 +10,7 @@ import {ProductResponse} from "../../interfaces/product-response";
 })
 export class ProductsListComponent implements OnInit {
 
-  private products: ProductResponse
+  public products: ProductResponse
 
   constructor(private productService: ProductService, private filterOptionsService: FilterOptionsService) {
     this.products = {
@@ -25,8 +25,7 @@ export class ProductsListComponent implements OnInit {
         this.products = response;
         console.log(response);
       });
-    })
-
+    });
   }
 
 }
