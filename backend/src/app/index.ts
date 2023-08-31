@@ -2,10 +2,14 @@ import * as express from 'express';
 import { connectToDatabase } from './config/db-connector';
 import Config from './config/envConfig';
 import routes from "./route/index";
+import * as cors from 'cors';
 
 const app = express();
 
 // Set up middlewares
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Parse incoming request bodies in a middleware
 app.use(express.urlencoded({ extended: false }));
