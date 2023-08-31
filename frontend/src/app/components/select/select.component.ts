@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
-import {FilterOptionsService} from "../../services/filter-options.service";
+import { FilterOptionsService } from "../../services/filter-options.service";
+import {FilterOptions} from "../../interfaces/filter-options";
 
 @Component({
   selector: 'app-select',
@@ -9,27 +11,19 @@ import {FilterOptionsService} from "../../services/filter-options.service";
 })
 export class SelectComponent implements OnInit {
 
-  brandFilterArray: string[];
-  categoryFilterArray: string[];
-  orderFilterArray: string[];
+  brandFilterArray: string[] = [];
+  categoryFilterArray: string[] = [];
+  orderFilterArray: string[] = ['ascending', 'descending'];
 
-  selectedBrand: string;
-  selectedCategory: string;
-  selectedOrder: string;
-  selectedPage: number;
-  selectedLimit: number;
+  filtersForm = new FormGroup({
+    selectedCategory: new FormControl(''),
+    selectedBrand: new FormControl(''),
+    selectedOrder: new FormControl(''),
+    selectedPage: new FormControl(1),
+    selectedLimit: new FormControl(10)
+  });
 
-
-  constructor(private productService: ProductService, private filterOptionsService: FilterOptionsService) {
-    this.brandFilterArray = [];
-    this.categoryFilterArray = [];
-    this.orderFilterArray = ['ascending', 'descending'];
-    this.selectedBrand = '';
-    this.selectedCategory = '';
-    this.selectedOrder = '';
-    this.selectedPage = 1;
-    this.selectedLimit = 10;
-  }
+  constructor(private productService: ProductService, private filterOptionsService: FilterOptionsService) {}
 
   async ngOnInit(): Promise<void> {
     try {
@@ -39,14 +33,16 @@ export class SelectComponent implements OnInit {
       console.error('Error initializing component:', error);
     }
   }
+
   submitForm() {
-    console.log('Form submitted');
-    this.filterOptionsService.setFilterOptions({
-      category: this.selectedCategory,
-      brand: this.selectedBrand,
-      order: this.selectedOrder,
-      page: this.selectedPage,
-      limit: this.selectedLimit,
-    })
+    const filterValues = this.filtersForm.value;
+    const transformedFilter: FilterOptions = {
+      category: filterValues.selectedCategory,
+      brand: filterValues.selectedBrand,
+      order: filterValues.selectedOrder,
+      page: filterValues.selectedPage,
+      limit: filterValues.selectedLimit
+    };
+    this.filterOptionsService.setFilterOptions(transformedFilter);
   }
 }

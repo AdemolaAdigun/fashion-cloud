@@ -1,34 +1,27 @@
-<mat-form-field>
-  <mat-label>Categories</mat-label>
-  <mat-select [(ngModel)]="selectedCategory">
-    <mat-option *ngFor="let filterData of categoryFilterArray" [value]="filterData">
-      {{filterData}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Brands</mat-label>
-  <mat-select [(ngModel)]="selectedBrand">
-    <mat-option *ngFor="let filterData of brandFilterArray" [value]="filterData">
-      {{filterData}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Order</mat-label>
-  <mat-select [(ngModel)]="selectedOrder">
-    <mat-option *ngFor="let filterData of orderFilterArray" [value]="filterData">
-      {{filterData}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Page</mat-label>
-  <input matInput [(ngModel)]="selectedPage">
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Limit</mat-label>
-  <input matInput [(ngModel)]="selectedLimit">
-</mat-form-field>
+<form [formGroup]="filtersForm" (ngSubmit)="submitForm()">
 
-<button (click)="submitForm()">Filter</button>
+  <ng-container *ngFor="let filter of [{label: 'Categories', items: categoryFilterArray, control: 'selectedCategory'},
+                                       {label: 'Brands', items: brandFilterArray, control: 'selectedBrand'},
+                                       {label: 'Order', items: orderFilterArray, control: 'selectedOrder'}]">
+    <mat-form-field>
+      <mat-label>{{filter.label}}</mat-label>
+      <mat-select formControlName="{{filter.control}}">
+        <mat-option *ngFor="let item of filter.items" [value]="item">
+          {{item}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+
+  <mat-form-field>
+    <mat-label>Page</mat-label>
+    <input matInput formControlName="selectedPage">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Limit</mat-label>
+    <input matInput formControlName="selectedLimit">
+  </mat-form-field>
+
+  <button type="submit">Filter</button>
+</form>

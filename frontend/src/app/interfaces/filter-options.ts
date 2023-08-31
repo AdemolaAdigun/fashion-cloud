@@ -1,7 +1,7 @@
 export interface FilterOptions {
-  category?: string;
-  brand?: string;
-  order?: string;
-  page?: number;
-  limit?: number;
+  category?: string | null;
+  brand?: string | null;
+  order?: string | null;
+  page?: number | null;
+  limit?: number | null;
 }
