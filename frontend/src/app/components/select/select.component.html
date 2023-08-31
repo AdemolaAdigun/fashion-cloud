@@ -1,24 +1,34 @@
 <mat-form-field>
   <mat-label>Categories</mat-label>
-  <mat-select>
+  <mat-select [(ngModel)]="selectedCategory">
     <mat-option *ngFor="let filterData of categoryFilterArray" [value]="filterData">
       {{filterData}}
     </mat-option>
   </mat-select>
 </mat-form-field>
 <mat-form-field>
-  <mat-label>Categories</mat-label>
-  <mat-select>
+  <mat-label>Brands</mat-label>
+  <mat-select [(ngModel)]="selectedBrand">
     <mat-option *ngFor="let filterData of brandFilterArray" [value]="filterData">
       {{filterData}}
     </mat-option>
   </mat-select>
 </mat-form-field>
 <mat-form-field>
-  <mat-label>Categories</mat-label>
-  <mat-select>
+  <mat-label>Order</mat-label>
+  <mat-select [(ngModel)]="selectedOrder">
     <mat-option *ngFor="let filterData of orderFilterArray" [value]="filterData">
       {{filterData}}
     </mat-option>
   </mat-select>
 </mat-form-field>
+<mat-form-field>
+  <mat-label>Page</mat-label>
+  <input matInput [(ngModel)]="selectedPage">
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Limit</mat-label>
+  <input matInput [(ngModel)]="selectedLimit">
+</mat-form-field>
+
+<button (click)="submitForm()">Filter</button>

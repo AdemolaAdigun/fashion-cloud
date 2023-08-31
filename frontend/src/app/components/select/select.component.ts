@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
+import {FilterOptionsService} from "../../services/filter-options.service";
 
 @Component({
   selector: 'app-select',
@@ -12,21 +13,40 @@ export class SelectComponent implements OnInit {
   categoryFilterArray: string[];
   orderFilterArray: string[];
 
-  constructor(private productService: ProductService) {
+  selectedBrand: string;
+  selectedCategory: string;
+  selectedOrder: string;
+  selectedPage: number;
+  selectedLimit: number;
+
+
+  constructor(private productService: ProductService, private filterOptionsService: FilterOptionsService) {
     this.brandFilterArray = [];
     this.categoryFilterArray = [];
-    this.orderFilterArray = [];
+    this.orderFilterArray = ['ascending', 'descending'];
+    this.selectedBrand = '';
+    this.selectedCategory = '';
+    this.selectedOrder = '';
+    this.selectedPage = 1;
+    this.selectedLimit = 10;
   }
 
   async ngOnInit(): Promise<void> {
     try {
       this.brandFilterArray = await this.productService.getFilterArray('brands');
       this.categoryFilterArray = await this.productService.getFilterArray('categories');
-      this.orderFilterArray = await this.productService.getFilterArray('order');
     } catch (error) {
       console.error('Error initializing component:', error);
     }
   }
-
-
+  submitForm() {
+    console.log('Form submitted');
+    this.filterOptionsService.setFilterOptions({
+      category: this.selectedCategory,
+      brand: this.selectedBrand,
+      order: this.selectedOrder,
+      page: this.selectedPage,
+      limit: this.selectedLimit,
+    })
+  }
 }

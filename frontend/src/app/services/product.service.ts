@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {lastValueFrom, Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {lastValueFrom} from "rxjs";
 import {environment} from "../../environments/environment";
 import {Product} from "../interfaces/product";
 import {FilterOptions} from "../interfaces/filter-options";
+import {ProductResponse} from "../interfaces/product-response";
 
 @Injectable({
   providedIn: 'root'
@@ -11,22 +12,23 @@ import {FilterOptions} from "../interfaces/filter-options";
 export class ProductService {
   constructor(private http: HttpClient) { }
 
-  /**
-   * Product service should take in 3 properties: brands, categories, order. All optional and default
-   */
-  public async getProducts(filterOptions: FilterOptions): Promise<Product[]> {
+  public async getProducts(filterOptions: FilterOptions | null): Promise<ProductResponse> {
     try {
-      const params = this.buildParams(filterOptions);
+
+      let params: { [key: string]: string } = {};
+
+      if (filterOptions) {
+        params = this.buildParams(filterOptions);
+      }
 
       const response = await lastValueFrom(
-        this.http.get<Product[]>(`${environment.API_URL}products`, { params })
+        this.http.get<Product[]>(`${environment.API_URL}products`, { params  })
       );
-
-      return response;
+      return { products: response, count: response.length };
 
     } catch (error) {
       console.error('Error fetching products:', error);
-      return [];
+      return { products: [], count: 0 };
     }
   }
 
