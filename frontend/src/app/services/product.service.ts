@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {lastValueFrom, Observable} from "rxjs";
 import {environment} from "../../environments/environment";
+import {Product} from "../interfaces/product";
+import {FilterOptions} from "../interfaces/filter-options";
 
 @Injectable({
   providedIn: 'root'
@@ -9,30 +11,41 @@ import {environment} from "../../environments/environment";
 export class ProductService {
   constructor(private http: HttpClient) { }
 
-  public getProducts(filters?: {brand?: string, category?: string}, sortOrder?: 'ascending' | 'descending', page?: number): Observable<Response> {
-    let params = new HttpParams();
+  /**
+   * Product service should take in 3 properties: brands, categories, order. All optional and default
+   */
+  public async getProducts(filterOptions: FilterOptions): Promise<Product[]> {
+    try {
+      const params = this.buildParams(filterOptions);
 
-    // Add filter parameters if they exist
-    if (filters) {
-      if (filters.brand) {
-        params = params.set('brand', filters.brand);
-      }
+      const response = await lastValueFrom(
+        this.http.get<Product[]>(`${environment.API_URL}products`, { params })
+      );
 
-      if (filters.category) {
-        params = params.set('category', filters.category);
-      }
+      return response;
+
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      return [];
     }
+  }
 
-    // Add sort order parameter if it exists
-    if (sortOrder) {
-      params = params.set('order', sortOrder);
+  public async getFilterArray(endpoint: string): Promise<string[]> {
+    try {
+      const response = await lastValueFrom(this.http.get<string[]>(`${environment.API_URL}products/${endpoint}`));
+      return response;
+    } catch (error) {
+      console.error(`Error fetching ${endpoint}:`, error);
+      return [];
     }
+  }
 
-    // Add pagination parameter if it exists
-    if (page) {
-      params = params.set('page', page.toString());
-    }
-
-    return this.http.get<Response>(`${environment.API_URL}products`, { params: params });
+  private buildParams(options: FilterOptions): { [key: string]: string } {
+    return Object.entries(options)
+      .filter(([_, value]) => value !== undefined)
+      .reduce((acc, [key, value]) => {
+        acc[key] = value.toString();
+        return acc;
+      }, {} as { [key: string]: string });
   }
 }

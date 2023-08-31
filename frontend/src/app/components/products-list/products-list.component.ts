@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService} from "../../services/product.service";
-import {Product} from "../../classes/product";
+import {Product} from "../../interfaces/product";
 import {ConverterService} from "../../services/converter.service";
+import {FilterOptions} from "../../interfaces/filter-options";
 
 @Component({
   selector: 'app-products-list',
@@ -14,12 +15,14 @@ export class ProductsListComponent implements OnInit {
 
   constructor(private productService: ProductService, private converter: ConverterService) {
     this.products = [];
-    this.productService.getProducts().subscribe((response: any) => {
-      this.products = this.converter.convertToProductsArray(response);
-    });
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    try {
+      this.products = await this.productService.getProducts({});
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
   }
 
 }
