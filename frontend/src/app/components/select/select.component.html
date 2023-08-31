@@ -1,0 +1,24 @@
+<mat-form-field>
+  <mat-label>Categories</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let filterData of categoryFilterArray" [value]="filterData">
+      {{filterData}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Categories</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let filterData of brandFilterArray" [value]="filterData">
+      {{filterData}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Categories</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let filterData of orderFilterArray" [value]="filterData">
+      {{filterData}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
