@@ -6,6 +6,8 @@ const routes = Router();
 
 const {
     getProducts,
+    getProductBrands,
+    getProductCategories,
     createProduct,
     updateProductById,
     deleteProductById
@@ -15,6 +17,12 @@ const {
 
 // Retrieve all products
 routes.get('/', getProducts);
+
+// Retrieve all product brands
+routes.get('/brands', getProductBrands);
+
+// Retrieve all product categories
+routes.get('/categories', getProductCategories);
 
 // Create a new product
 routes.post('/', createProduct);

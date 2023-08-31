@@ -54,10 +54,43 @@ export default {
     },
 
     /**
+     * Retrieves distinct brands of the products.
+     *
+     * @param {Request} request - Express request object.
+     * @param {Response} response - Express response object.
+     * @returns {Promise<void>}
+     */
+    async getProductBrands(request: Request, response: Response): Promise<void> {
+        try {
+            const brands = await Product.distinct("brandName");
+            response.status(200).json(brands);
+        } catch (error) {
+            handleError(response, error, "Failed to get brands");
+        }
+    },
+
+    /**
+     * Retrieves distinct categories of the products.
+     *
+     * @param {Request} request - Express request object.
+     * @param {Response} response - Express response object.
+     * @returns {Promise<void>}
+     */
+    async getProductCategories(request: Request, response: Response): Promise<void> {
+        try {
+            const categories = await Product.distinct("category");
+            response.status(200).json(categories);
+        } catch (error) {
+            handleError(response, error, "Failed to get categories");
+        }
+    },
+
+    /**
      * Creates a new product.
      *
      * @param {Request} request - Express request object.
      * @param {Response} response - Express response object.
+     * @returns {Promise<void>}
      */
     async createProduct(request: Request, response: Response): Promise<void> {
         try {
